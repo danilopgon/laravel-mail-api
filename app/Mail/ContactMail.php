@@ -13,18 +13,21 @@ class ContactMail extends Mailable
 {
     use Queueable, SerializesModels;
 
-    private $name;
-    private $email;
-    private $phone;
-    private $message;
+    public $name;
+    public $email;
+    public $phone;
+    public $message;
 
 
     /**
      * Create a new message instance.
      */
-    public function __construct()
+    public function __construct($name, $email, $phone, $message)
     {
-        //
+        $this->name = $name;
+        $this->email = $email;
+        $this->phone = $phone;
+        $this->message = $message;
     }
 
     /**
@@ -33,9 +36,7 @@ class ContactMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            // ...
-
-            from: new Address($this->email, $this->name),
+            from: new Address(env('MAIL_FROM_ADDRESS'), env('MAIL_FROM_NAME')),
             subject: 'Nuevo mensaje de '  . $this->name . ' en tu sitio web: ' . env('APP_NAME')
         );
     }
@@ -47,6 +48,12 @@ class ContactMail extends Mailable
     {
         return new Content(
             view: 'emails.contact',
+            with: [
+                'name' => $this->name,
+                'email' => $this->email,
+                'phone' => $this->phone,
+                'message' => $this->message
+            ]
         );
     }
 

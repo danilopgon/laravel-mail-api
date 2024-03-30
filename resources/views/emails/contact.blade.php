@@ -16,7 +16,7 @@
                 <li><strong>Teléfono:</strong> {{ $phone }}</li>
             </ul>
             <p style="margin-top: 20px;"><strong>Mensaje:</strong></p>
-            <p>{{ $message }}</p>
+            <p>{{ $formMessage }}</p>
         </div>
     </body>
     </html>

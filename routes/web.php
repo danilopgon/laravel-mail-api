@@ -10,7 +10,7 @@ Route::get('/mailable', function () {
             'name' => 'John Doe',
             'email' => 'test@test.es',
             'phone' => '123456789',
-            'message' => 'Hello, this is a test email'
+            'formMessage' => 'Hello, this is a test email'
         ]
     );
 });

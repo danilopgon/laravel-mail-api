@@ -13,15 +13,15 @@ class EmailController
         $name = (string) $request->json('name');
         $email = (string) $request->json('email');
         $phone = (string) $request->json('phone');
-        $message = (string) $request->json('message');
+        $formMessage = (string) $request->json('message');
 
-        if (!$name || !$email || !$phone || !$message) {
+        if (!$name || !$email || !$phone || !$formMessage) {
             return response()->json(['message' => 'Missing data'], 400);
         }
 
         // Send email
         try {
-            Mail::to(env('MAIL_FROM_ADDRESS'))->send(new ContactMail($name, $email, $phone, $message));
+            Mail::to(env('MAIL_FROM_ADDRESS'))->send(new ContactMail($name, $email, $phone, $formMessage));
 
             return response()->json(['message' => 'Email sent']);
         } catch (\Exception $e) {

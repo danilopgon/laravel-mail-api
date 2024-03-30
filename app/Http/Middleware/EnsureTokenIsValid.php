@@ -15,12 +15,17 @@ class EnsureTokenIsValid
      */
     public function handle(Request $request, Closure $next): Response
     {
-        $privateToken = config('services.private_token');
-
-        if ($request->header('Authorization') !== $privateToken) {
+        $privateToken = env('API_PRIVATE_TOKEN');
+        $authHeader = $request->header('Authorization');
+    
+        // Split the header into "Bearer" and the token
+        $parts = explode(' ', $authHeader);
+    
+        // If there are not exactly 2 parts, or the token does not match, return Unauthorized
+        if (count($parts) !== 2 || $parts[1] !== $privateToken) {
             return response()->json(['message' => 'Unauthorized'], 401);
         }
-
+    
         return $next($request);
     }
 }

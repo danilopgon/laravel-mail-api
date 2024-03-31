@@ -22,7 +22,7 @@ This project provides a simple Laravel template for sending emails from frontend
     cp .env.example .env
     ```
 
-4. Configure your database in the `.env` file if you intend to store the tokens.
+4. Configure your database in the `.env` file to store the tokens and your mail service.
 
 5. Run migrations to create necessary tables in the database (if applicable):
 

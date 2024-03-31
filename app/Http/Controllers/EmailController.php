@@ -21,7 +21,7 @@ class EmailController
 
         // Send email
         try {
-            Mail::to(env('MAIL_FROM_ADDRESS'))->send(new ContactMail($name, $email, $phone, $formMessage));
+            Mail::to(env('MAIL_TO_ADDRESS'))->send(new ContactMail($name, $email, $phone, $formMessage));
 
             return response()->json(['message' => 'Email sent']);
         } catch (\Exception $e) {

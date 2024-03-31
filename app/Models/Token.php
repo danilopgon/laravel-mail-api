@@ -5,7 +5,6 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
-use Illuminate\Support\Facades\Log;
 use Carbon\Carbon;
 
 class Token extends Model
@@ -35,19 +34,17 @@ class Token extends Model
     }
 
     // Check if the token is valid
-public function isValid()
-{
-    Log::info($this->expires_at);
-    // Cast expires_at to Carbon if it's not already
-    if (!$this->expires_at instanceof Carbon) {
-        $this->expires_at = Carbon::parse($this->expires_at);
+    public function isValid()
+    {
+
+        if (!$this->expires_at instanceof Carbon) {
+            $this->expires_at = Carbon::parse($this->expires_at);
+        }
+        if ($this->expires_at === null || $this->expires_at->isFuture()) {
+            return true;
+        } else {
+            $this->delete();
+            return false;
+        }
     }
-    Log::info($this->expires_at);
-    if ($this->expires_at === null || $this->expires_at->isFuture()) {
-        return true;
-    } else {
-        $this->delete();
-        return false;
-    }
-}
 }

@@ -7,7 +7,7 @@ This project provides a simple Laravel template for sending emails from frontend
 1. Clone this repository to your local machine:
     
     ```bash
-    git clone <REPOSITORY_URL>
+    git clone https://github.com/danilopgon/laravel-mail-api/
     ```
 
 2. Install project dependencies using Composer:

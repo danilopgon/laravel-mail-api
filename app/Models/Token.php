@@ -29,7 +29,6 @@ class Token extends Model
         return [
             'token' => 'required|unique:tokens',
             'expires_at' => 'nullable|date',
-            // Add any other validation rules here
         ];
     }
 
